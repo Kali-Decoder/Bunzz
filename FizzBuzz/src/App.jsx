@@ -8,7 +8,7 @@ function App() {
   const [msg,setMsg]=useState("Good To Go...");
   const counting = async (cnt) => {
     try {
-      let data = await axios.post("http://localhost:4000/getValue", {
+      let data = await axios.post("http://localhost:3000/getValue", {
         num: cnt,
       });
       let _msg= data.data.msg;
