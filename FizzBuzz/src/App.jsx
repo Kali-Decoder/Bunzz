@@ -4,17 +4,20 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
+  const [msg,setMsg]=useState("Good To Go...");
   const counting = async (cnt) => {
-    console.log(cnt);
     try {
       let data = await axios.post("http://localhost:4000/getValue", {
         num: cnt,
       });
-      if (data.data.msg) {
-        notify(data.data.msg);
+      let _msg= data.data.msg;
+      if (_msg) {
+        notify(_msg);
+        setMsg(_msg);
       }else{
         notify("No Message !!!");
+        setMsg("No Message !!!");
       }
     } catch (error) {
       notify("Request Failed");
@@ -28,9 +31,9 @@ function App() {
   return (
     <div className="App">
       <h1 className="text-xl font-bold text-white">
-        Hello , <span className="bg-accent">Bunzzz</span>
+        Hello , <br/> <span className="bg-accent">{msg}</span>
       </h1>
-      <h1 className="text-4xl mt-3 mb-3 ">{count}</h1>
+      <h1 className="text-4xl mt-3 mb-3 ">{count-1}</h1>
       <button
         className="btn btn-outline btn-accent"
         onClick={() => {
